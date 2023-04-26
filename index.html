@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Rubik+Pixels&display=swap"
+            rel="stylesheet"
+        />
+        <title>Proyecto: MovieDB</title>
+        <link rel="stylesheet" href="./styles/app.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header id="header">
+            <div class="header-container">
+                <h1>Movies</h1>
+                <form id="form-search" action="#">
+                    <input
+                        type="search"
+                        name="movie-search"
+                        id="input-movie--search"
+                        placeholder="Ingrese su pelicula"
+                    />
+                    <button id="btn-search" type="button" class="btn-search">
+                        🔍
+                    </button>
+                </form>
+            </div>
+        </header>
+        <!-- END Header -->
+
+        <!-- Container Button Back -->
+        <div id="container-button--back" class="inactive">
+            <button class="btn-back">🔙</button>
+        </div>
+        <!-- END Container Button Back -->
+
+        <!-- CATEGORY -->
+
+        <!-- Category Buttons -->
+        <section id="category-buttons" class="inactive">
+            <!-- Skeleton Categries Button -->
+            <div id="skeleton-category--buttons">
+                <h2 class="subtitle-loading"></h2>
+
+                <div id="container-skeletonCategories--buttons">
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
+                </div>
+            </div>
+            <!-- END Skeleton Categries Button -->
+
+            <h2 class="subtitle subtitle-categories--button"></h2>
+
+            <div id="container-categories--buttons"></div>
+        </section>
+        <!-- END Category Buttons -->
+
+        <!-- Category Movies Preview -->
+        <section id="category-movies--preview" class="inactive">
+            <article id="article-category--preview">
+                <div class="container-preview-top">
+                    <h2 class="subtitle subtitle-category--preview">
+                        Categoria:
+                    </h2>
+                    <div class="container-preview-buttons">
+                        <button class="btn-contract">👆</button>
+                        <button
+                            class="btn-more btn-more--category"
+                            onclick="getMoviesByGenre(this.id)"
+                        >
+                            ➕
+                        </button>
+                    </div>
+                </div>
+
+                <div id="container-category--preview"></div>
+            </article>
+        </section>
+        <!-- END Category Movies Preview -->
+
+        <!-- Categories All Movies -->
+        <section id="category-movies" class="inactive">
+            <article id="article-category--movies">
+                <h2 class="subtitle-category--movies"></h2>
+
+                <div
+                    id="container-category--movies"
+                    class="container-movies--large"
+                ></div>
+            </article>
+        </section>
+        <!-- Categories All Movies -->
+
+        <!-- END CATEGORY -->
+
+        <!-- Trending -->
+
+        <!-- Trending Movies Preview -->
+        <section id="trending-movies--preview">
+            <article id="article-trending--preview">
+                <!-- Skeleton Trending Preview -->
+                <div id="skeleton-trending--preview">
+                    <h2 class="subtitle-loading"></h2>
+
+                    <div id="container-skeletonTrending--preview">
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                    </div>
+                </div>
+                <!-- END Skeleton Trending Preview -->
+
+                <div class="container-preview-top">
+                    <h2 class="subtitle">Trending</h2>
+
+                    <button
+                        class="btn-more btn-more--trending"
+                        onclick="getTrendingMovies()"
+                    >
+                        ➕
+                    </button>
+                </div>
+
+                <div id="container-trending--preview"></div>
+            </article>
+        </section>
+        <!-- END Trending Movies Preview -->
+
+        <!-- Trending All Movies -->
+        <section id="trending-movies" class="inactive">
+            <article id="article-trending--movies">
+                <h2 class="subtitle-trending--movies">Trending Movies</h2>
+
+                <div
+                    id="container-trending--movies"
+                    class="container-movies--large"
+                ></div>
+            </article>
+        </section>
+        <!-- Trending All Movies -->
+
+        <!-- END Trending -->
+
+        <!-- Movie Detail -->
+        <section id="movie-details" class="inactive">
+            <article id="article-movie--details">
+                <h2 class="subtitle-movie--details"></h2>
+
+                <div id="container-movie--details"></div>
+
+                <div class="similar-movies">
+                    <h2 class="subtitle">Peliculas Similares</h2>
+                    <div id="container-similar--movies"></div>
+                </div>
+            </article>
+        </section>
+        <!-- END Movie Detail -->
+
+        <!-- Search Movies -->
+        <section id="search-movies" class="inactive">
+            <article id="article-search--movies">
+                <h2 class="subtitle-search--movies"></h2>
+
+                <div
+                    id="container-search--movies"
+                    class="container-movies--large"
+                ></div>
+            </article>
+        </section>
+        <!-- Search Movies -->
+
+        <footer>Hecho por @mmascheroni</footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./src/selectors.js"></script>
+        <script src="./src/main.js"></script>
+        <script src="./src/navigation.js"></script>
+    </body>
+</html>
