@@ -46,6 +46,7 @@ const containerBtnMoreTrendingPreviewTop = $('.trending-preview--top');
 
 // Subtitle
 const subtitleTrendingMovies = $('.subtitle-trending--movies');
+const subtitleTrendingMoviesAll = $('.subtitle-trending--moviesAll');
 
 // Buttons
 // const btnMoreTrending = $('.btn-more--trending');
@@ -61,6 +62,7 @@ const containerSimilarMovies = $('#container-similar--movies');
 
 // Subtitle
 const subtitleMovieDetails = $('.subtitle-movie--details');
+const subtitleSimilarMovies = $('.subtitle-similar--movies');
 
 /* Search Movie */
 
@@ -85,6 +87,14 @@ const btnSearch = $('.btn-search');
 const skeletonLoadingCategoryBtn = $('#skeleton-category--buttons');
 // Skeleton Loading Category Movies Preview
 const skeletonLoadingCategoryMoviesPreview = $('#skeleton-category--preview');
+const skeletonLoadingCategoryMovies = $('#skeleton-category--movies');
 
 // Skeleton Loading Trending Movies
 const skeletonLoadingTrendingMoviesPreview = $('#skeleton-trending--preview');
+const skeletonLoadingTrendingMovies = $('#skeleton-trending--movies');
+
+/* SKeleton Movie Details */
+const skeletonMovieDetails = $('#skeleton-movies--details');
+
+/* SKeleton Search Movie */
+const skeletonLoadingSearchMovie = $('#skeleton-search--movies');

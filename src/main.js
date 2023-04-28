@@ -192,6 +192,7 @@ async function getMoviesByGenrePreview(id) {
 // GET Movies By Category
 async function getMoviesByGenre(id) {
     location.hash = `#category=${id}`;
+    skeletonLoadingCategoryMovies.removeAttribute('class');
 
     const res = await fetch(
         `${BASE_URL}${URL_GENRE}?api_key=${API_KEY}&with_genres=${id}`
@@ -202,6 +203,7 @@ async function getMoviesByGenre(id) {
     const movies = data.results;
 
     createContainerMoviesOnLarge(movies, containerCategoryMovies);
+    skeletonLoadingCategoryMovies.setAttribute('class', 'inactive');
 }
 
 /* Trending */
@@ -227,17 +229,23 @@ async function getTrendingMoviesPreview() {
 
 async function getTrendingMovies() {
     location.hash = `#trends`;
+    skeletonLoadingTrendingMovies.removeAttribute('class');
 
     const { data } = await api('/trending/movie/day');
+
+    subtitleTrendingMoviesAll.innerHTML = '';
+    subtitleTrendingMoviesAll.innerHTML += 'Trending Movies';
 
     const movies = data.results;
 
     createContainerMoviesOnLarge(movies, containerTrendingMovies);
+    skeletonLoadingTrendingMovies.setAttribute('class', 'inactive');
 }
 
 /* Movie */
 async function getMovie(id) {
     location.hash = `#movie=${id}`;
+    skeletonMovieDetails.removeAttribute('class');
 
     const res = await fetch(
         `${BASE_URL}/movie/${id}?api_key=${API_KEY}${PARAMETER_LANGUAGE}`
@@ -250,7 +258,11 @@ async function getMovie(id) {
         subtitleMovieDetails
     );
 
+    subtitleSimilarMovies.innerHTML = '';
+    subtitleSimilarMovies.innerHTML = 'Peliculas Similares';
+
     GetSimilarMovies(id);
+    skeletonMovieDetails.setAttribute('class', 'inactive');
 }
 
 /* Similar Movies */
@@ -265,6 +277,8 @@ async function GetSimilarMovies(id) {
 /* Search Movie */
 async function getMovieBySearch(query) {
     location.hash = `#search=${query}`;
+    skeletonLoadingSearchMovie.removeAttribute('class');
+
     const { data } = await api('/search/movie', {
         params: {
             query,
@@ -274,4 +288,5 @@ async function getMovieBySearch(query) {
     const movies = data.results;
 
     createContainerMoviesOnLarge(movies, containerSearchMovies);
+    skeletonLoadingSearchMovie.setAttribute('class', 'inactive');
 }

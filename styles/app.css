@@ -218,7 +218,8 @@ img:hover {
 }
 
 .subtitle-category--movies,
-.subtitle-trending--movies {
+.subtitle-trending--movies,
+.subtitle-trending--moviesAll {
     text-align: center;
 }
 
@@ -251,7 +252,7 @@ img:hover {
 }
 
 .btn-more--trending {
-    margin-right: 10px;
+    margin-right: 10px !important;
 }
 
 /* Trending Movies */
@@ -325,12 +326,6 @@ footer {
     white-space: nowrap;
 }
 
-/* #skeleton-category--preview {
-    padding: 10px;
-    overflow-x: scroll;
-    white-space: nowrap;
-} */
-
 #container-skeletonTrending--preview,
 #container-skeletonCategory--preview {
     display: flex;
@@ -365,7 +360,7 @@ footer {
     margin-bottom: 12px;
     margin-right: 5px;
     padding: 7px 12px;
-    height: 20px;
+    height: 30px;
     min-height: 20px;
     max-height: 20px;
     width: 50px;
@@ -401,6 +396,70 @@ footer {
 .container-button--loading:nth-child(8),
 .container-button--loading:nth-child(10) {
     animation-delay: 0.1s;
+}
+
+/* Skeleton Movie Details */
+#skeleton-movies--details {
+    padding: 20px;
+}
+
+.title-movie--loading {
+    background: var(--purple-light-2);
+    margin: 0 auto;
+    margin-bottom: 30px;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    animation: loading-skeleton infinite 1s;
+}
+
+#container-skeletonMovie--details {
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-description--loading {
+    background: var(--purple-light-2);
+    margin-bottom: 12px;
+    margin-right: 5px;
+    margin-top: 10px;
+    padding: 7px 12px;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    width: 80%;
+    min-width: 80%;
+    max-width: 80%;
+    animation: loading-skeleton infinite 1s;
+}
+
+#container-skeleton--movies {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 8px;
+}
+
+.subtitle-movies--loading {
+    background: var(--purple-light-2);
+    margin: 0 auto;
+    margin-bottom: 30px;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    animation: loading-skeleton infinite 1s;
 }
 
 @keyframes loading-skeleton {
@@ -481,7 +540,8 @@ footer {
     }
 
     .subtitle-category--movies,
-    .subtitle-trending--movies {
+    .subtitle-trending--movies,
+    .subtitle-trending--moviesAll {
         font-size: 36px;
     }
 
@@ -542,6 +602,14 @@ footer {
         width: 220px;
         min-width: 220px;
         max-width: 220px;
+        animation: loading-skeleton infinite 1s;
+    }
+
+    .title-movie--loading,
+    .subtitle-movies--loading {
+        width: 150px;
+        min-width: 150px;
+        max-width: 150px;
         animation: loading-skeleton infinite 1s;
     }
 }
