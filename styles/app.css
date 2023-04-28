@@ -429,17 +429,18 @@ footer {
 #container-skeletonMovie--details {
     padding: 10px;
     text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
+}
+
+.img-loading-detail {
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .container-description--loading {
     background: var(--purple-light-2);
-    margin-bottom: 12px;
-    margin-right: 5px;
-    margin-top: 10px;
+    text-align: center;
+    margin: 0 auto;
     padding: 7px 12px;
     height: 30px;
     min-height: 30px;
@@ -625,8 +626,7 @@ footer {
     .container-div--loading {
         background: var(--purple-light-2);
         border-radius: 20px;
-        margin-bottom: 12px;
-        margin-right: 5px;
+        margin-bottom: 15px;
         padding: 7px 12px;
         height: 300px;
         min-height: 300px;
