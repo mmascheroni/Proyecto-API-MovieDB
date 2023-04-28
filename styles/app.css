@@ -320,7 +320,7 @@ footer {
     font-size: 20px;
     font-weight: bolder;
     padding: 10px;
-    height: 80px;
+    height: 100px;
 }
 
 /************************************/
@@ -589,10 +589,6 @@ footer {
         padding: 20px 0 10px 40px;
     }
 
-    footer {
-        height: 50px;
-    }
-
     #skeleton-category--buttons {
         padding: 20px 30px 20px 30px;
         overflow-x: scroll;
@@ -643,5 +639,9 @@ footer {
         min-width: 150px;
         max-width: 150px;
         animation: loading-skeleton infinite 1s;
+    }
+
+    footer {
+        height: 70px;
     }
 }
