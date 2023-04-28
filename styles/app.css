@@ -58,7 +58,7 @@ img {
 .img-movie--details {
     border-radius: 20px;
     width: fit-content;
-    height: 270px;
+    height: 350px;
 }
 
 .subtitle {
@@ -70,8 +70,10 @@ img {
 .btn-contract,
 .btn-back {
     margin-top: 10px;
-    background-color: var(--grey-colour);
+    background-color: var(--purple-light-1);
     padding: 5px;
+    font-weight: bolder;
+    color: #000000;
 }
 
 .container-movies--large {
@@ -92,12 +94,12 @@ img {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    padding: 12px;
+    padding: 30px 15px;
 }
 
 .btn-search {
     background-color: var(--black-colour);
-    font-size: 17px;
+    font-size: 18px;
     padding: 0;
 }
 
@@ -106,6 +108,7 @@ input {
     border-radius: 10px;
     font-size: 12px;
     padding-left: 16px;
+    height: 18px;
 }
 
 #input-movie--search {
@@ -165,7 +168,8 @@ input {
     background-color: var(--grey-colour);
     color: white;
     font-size: 15px;
-    margin-bottom: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: 5px;
     padding: 7px 12px;
 }
@@ -223,6 +227,14 @@ img:hover {
     text-align: center;
 }
 
+.subtitle-categories--button {
+    padding-top: 30px;
+}
+
+.subtitle-trending--movies {
+    margin: 30px 0;
+}
+
 /************************************/
 /*            Trending              */
 /************************************/
@@ -237,6 +249,7 @@ img:hover {
     overflow-x: scroll;
     scrollbar-width: thin;
     white-space: nowrap;
+    padding-bottom: 50px;
 }
 
 #container-trending--preview::-webkit-scrollbar {
@@ -310,7 +323,7 @@ footer {
     font-size: 20px;
     font-weight: bolder;
     padding: 10px;
-    height: 50px;
+    height: 80px;
 }
 
 /************************************/
