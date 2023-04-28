@@ -27,6 +27,7 @@ function homePage() {
 
     // Category
     sectionCategoryMovies.setAttribute('class', 'inactive');
+    skeletonLoadingCategoryMoviesPreview.setAttribute('class', 'inactive');
     // Trending
     sectionTrendingMovies.setAttribute('class', 'inactive');
     // Movie Details

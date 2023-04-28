@@ -151,15 +151,19 @@ async function getCategories() {
 
 // GET Movies by Category Preview
 async function getMoviesByGenrePreview(id) {
+    // Remove a inactive class
     sectionCategoryMoviesPreview.removeAttribute('class');
+    skeletonLoadingCategoryMoviesPreview.removeAttribute('class');
+
+    // Set a inactive class
+    btnContract.setAttribute('class', 'inactive');
+    btnMoreCategory.setAttribute('class', 'inactive');
 
     const genre = document.getElementById(`${id}`).textContent;
     btnMoreCategory.setAttribute('id', id);
 
-    // Set Name in Container Category Movies Preview
     containerCategoryMoviesPreview.innerHTML = '';
     categoryPreviewSubititle.innerHTML = '';
-    categoryPreviewSubititle.innerHTML += `Categoria: ${genre}`;
 
     // Set Name in Container Category Movies on container Large
     categorySubtitle.innerHTML = '';
@@ -172,7 +176,17 @@ async function getMoviesByGenrePreview(id) {
 
     const movies = data.results;
 
+    // Hide Skeleton Loadint Category Movies Preview
+    skeletonLoadingCategoryMoviesPreview.setAttribute('class', 'inactive');
+
     createContainerMoviesAndScrollX(movies, containerCategoryMoviesPreview);
+
+    // Set Name in Container Category Movies Preview
+    categoryPreviewSubititle.innerHTML += `Categoria: ${genre}`;
+
+    // Show the buttons, quit the inactive class
+    btnMoreCategory.setAttribute('class', 'btn-more', 'btn-more--category');
+    btnContract.setAttribute('class', 'btn-contract');
 }
 
 // GET Movies By Category
@@ -194,9 +208,18 @@ async function getMoviesByGenre(id) {
 
 // GET Trending Movies Preview
 async function getTrendingMoviesPreview() {
+    skeletonLoadingCategoryMoviesPreview.removeAttribute('class');
+
     const { data } = await api('/trending/movie/day');
 
     const movies = data.results;
+
+    subtitleTrendingMovies.innerHTML = 'Trending';
+    // btnMoreTrending.innerHTML = '➕';
+    containerBtnMoreTrendingPreviewTop.innerHTML = '';
+    containerBtnMoreTrendingPreviewTop.innerHTML += `
+        <button class="btn-more btn-more--trending" onclick="getTrendingMovies()">➕</button>
+    `;
 
     createContainerMoviesAndScrollX(movies, containerTrendingMoviesPreview);
     skeletonLoadingTrendingMoviesPreview.setAttribute('class', 'inactive');

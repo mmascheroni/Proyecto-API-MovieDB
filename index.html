@@ -63,6 +63,7 @@
                     <button class="container-button--loading"></button>
                     <button class="container-button--loading"></button>
                     <button class="container-button--loading"></button>
+                    <button class="container-button--loading"></button>
                 </div>
             </div>
             <!-- END Skeleton Categries Button -->
@@ -76,10 +77,34 @@
         <!-- Category Movies Preview -->
         <section id="category-movies--preview" class="inactive">
             <article id="article-category--preview">
+                <!-- Skeleton Trending Preview -->
+                <div id="skeleton-category--preview" class="inactive">
+                    <div class="container-preview-top">
+                        <h2 class="subtitle-loading"></h2>
+                        <div class="container-preview-button">
+                            <button class="btn-more btn-more--loading">
+                                👆
+                            </button>
+                            <button class="btn-more btn-more--loading">
+                                ➕
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="container-skeletonCategory--preview">
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                        <div class="container-div--loading"></div>
+                    </div>
+                </div>
+                <!-- END Skeleton Trending Preview -->
+
                 <div class="container-preview-top">
-                    <h2 class="subtitle subtitle-category--preview">
-                        Categoria:
-                    </h2>
+                    <h2 class="subtitle subtitle-category--preview"></h2>
                     <div class="container-preview-buttons">
                         <button class="btn-contract">👆</button>
                         <button
@@ -118,9 +143,13 @@
             <article id="article-trending--preview">
                 <!-- Skeleton Trending Preview -->
                 <div id="skeleton-trending--preview">
-                    <h2 class="subtitle-loading"></h2>
+                    <div class="container-preview-top">
+                        <h2 class="subtitle-loading"></h2>
+                        <button class="btn-more btn-more--loading">➕</button>
+                    </div>
 
                     <div id="container-skeletonTrending--preview">
+                        <div class="container-div--loading"></div>
                         <div class="container-div--loading"></div>
                         <div class="container-div--loading"></div>
                         <div class="container-div--loading"></div>
@@ -132,14 +161,13 @@
                 <!-- END Skeleton Trending Preview -->
 
                 <div class="container-preview-top">
-                    <h2 class="subtitle">Trending</h2>
+                    <h2 class="subtitle subtitle-trending--movies"></h2>
 
-                    <button
-                        class="btn-more btn-more--trending"
+                    <div class="trending-preview--top"></div>
+                    <!-- <button
+                        class="btn-more btn-more--trending inactive"
                         onclick="getTrendingMovies()"
-                    >
-                        ➕
-                    </button>
+                    ></button> -->
                 </div>
 
                 <div id="container-trending--preview"></div>
