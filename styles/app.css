@@ -334,7 +334,7 @@ footer {
 #skeleton-category--buttons,
 #skeleton-trending--preview,
 #skeleton-category--preview {
-    padding: 20px 10px 20px 10px;
+    padding: 40px 10px 20px 10px;
     overflow-x: scroll;
     white-space: nowrap;
 }
