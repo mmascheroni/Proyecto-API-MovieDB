@@ -286,12 +286,8 @@ img:hover {
 }
 
 #container-movie--details {
-    padding: 10px;
+    padding: 20px;
     text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
 }
 
 .subtitle-movie--details {
@@ -301,6 +297,7 @@ img:hover {
 .container-description {
     color: white;
     width: 80%;
+    margin: 0 auto;
 }
 
 .descritpion-movie {
@@ -487,6 +484,29 @@ footer {
         opacity: 0%;
     }
 }
+
+/************************************/
+/*            Responsive            */
+/************************************/
+@media screen and (min-width: 400px) {
+    .subtitle-categories--button {
+        padding-top: 20px;
+    }
+
+    .subtitle-trending--movies {
+        margin: 0;
+    }
+
+    #container-trending--preview {
+        padding-bottom: 20px;
+    }
+
+    .btn-category {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+}
+
 /************************************/
 /*            Responsive            */
 /************************************/
@@ -553,7 +573,6 @@ footer {
     }
 
     .subtitle-category--movies,
-    .subtitle-trending--movies,
     .subtitle-trending--moviesAll {
         font-size: 36px;
     }
