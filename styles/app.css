@@ -168,7 +168,7 @@ input {
     background-color: var(--grey-colour);
     color: white;
     font-size: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
     margin-right: 5px;
     padding: 7px 12px;
@@ -227,13 +227,13 @@ img:hover {
     text-align: center;
 }
 
-.subtitle-categories--button {
+/* .subtitle-categories--button {
     padding-top: 30px;
-}
+} */
 
-.subtitle-trending--movies {
-    margin: 30px 0;
-}
+/* .subtitle-trending--movies {
+    margin: 10px 0;
+} */
 
 /************************************/
 /*            Trending              */
@@ -249,7 +249,6 @@ img:hover {
     overflow-x: scroll;
     scrollbar-width: thin;
     white-space: nowrap;
-    padding-bottom: 50px;
 }
 
 #container-trending--preview::-webkit-scrollbar {
@@ -320,7 +319,7 @@ footer {
     font-size: 20px;
     font-weight: bolder;
     padding: 10px;
-    height: 5%;
+    height: 10%;
     width: 100%;
 }
 
