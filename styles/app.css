@@ -57,8 +57,8 @@ img {
 .movie-large img,
 .img-movie--details {
     border-radius: 20px;
-    width: fit-content;
-    max-height: 100%;
+    width: 200px;
+    height: 300px;
 }
 
 .subtitle {

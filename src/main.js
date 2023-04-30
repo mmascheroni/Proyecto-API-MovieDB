@@ -41,16 +41,57 @@ btnBack.addEventListener('click', () => {
 
 // Functions
 
+// Utils
+
+const lazyLoader = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            const url = entry.target.getAttribute('data-img');
+            entry.target.setAttribute('src', url);
+        }
+    });
+});
+
 // Create Container with movies and scroll X
-function createContainerMoviesAndScrollX(iterable, container) {
+function createContainerMoviesAndScrollX(
+    iterable,
+    container,
+    lazyLoad = false
+) {
     container.innerHTML = '';
 
     iterable.forEach((i) => {
-        container.innerHTML += `
-            <div class='movie'>
-                <img id='${i.id}' src='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
-            </div>
-        `;
+        const movieContainer = document.createElement('div');
+        movieContainer.classList.add('movie');
+
+        const movieImg = document.createElement('img');
+        movieImg.setAttribute('id', i.id);
+        movieImg.setAttribute('alt', i.title);
+        movieImg.setAttribute('onClick', 'getMovie(this.id)');
+
+        if (i.poster_path) {
+            movieImg.setAttribute(
+                lazyLoad ? 'data-img' : 'src',
+                `${BASE_URL_IMG}${i.poster_path}`
+            );
+        } else {
+            movieImg.setAttribute('src', 'assets/no-image.avif');
+            // movieImg.style.width = '300px';
+            // movieImg.style.height = '450px';
+        }
+
+        if (lazyLoad) {
+            lazyLoader.observe(movieImg);
+        }
+
+        movieContainer.appendChild(movieImg);
+        container.appendChild(movieContainer);
+
+        // container.innerHTML += `
+        //     <div class='movie'>
+        //         <img id='${i.id}' data-img='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
+        //     </div>
+        // `;
     });
 }
 
@@ -59,11 +100,19 @@ function createContainerMoviesOnLarge(iterable, container) {
     container.innerHTML = '';
 
     iterable.forEach((i) => {
-        container.innerHTML += `
+        if (i.poster_path) {
+            container.innerHTML += `
             <div class='movie-large'>
                 <img id='${i.id}' src='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
             </div>
         `;
+        } else {
+            container.innerHTML += `
+            <div class='movie-large'>
+                <img id='${i.id}' src='assets/no-image.avif' alt='${i.original_title}' onClick='getMovie(this.id)'/>
+            </div>
+        `;
+        }
     });
 }
 
@@ -179,7 +228,11 @@ async function getMoviesByGenrePreview(id) {
     // Hide Skeleton Loadint Category Movies Preview
     skeletonLoadingCategoryMoviesPreview.setAttribute('class', 'inactive');
 
-    createContainerMoviesAndScrollX(movies, containerCategoryMoviesPreview);
+    createContainerMoviesAndScrollX(
+        movies,
+        containerCategoryMoviesPreview,
+        true
+    );
 
     // Set Name in Container Category Movies Preview
     categoryPreviewSubititle.innerHTML += `Categoria: ${genre}`;
@@ -223,7 +276,11 @@ async function getTrendingMoviesPreview() {
         <button class="btn-more btn-more--trending" onclick="getTrendingMovies()">➕</button>
     `;
 
-    createContainerMoviesAndScrollX(movies, containerTrendingMoviesPreview);
+    createContainerMoviesAndScrollX(
+        movies,
+        containerTrendingMoviesPreview,
+        true
+    );
     skeletonLoadingTrendingMoviesPreview.setAttribute('class', 'inactive');
 }
 
@@ -286,6 +343,8 @@ async function getMovieBySearch(query) {
     });
 
     const movies = data.results;
+
+    console.log(movies);
 
     createContainerMoviesOnLarge(movies, containerSearchMovies);
     skeletonLoadingSearchMovie.setAttribute('class', 'inactive');
