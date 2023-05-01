@@ -94,23 +94,57 @@ function createContainerMoviesAndScrollX(
 }
 
 // Create Container with movies on large
-function createContainerMoviesOnLarge(iterable, container) {
-    container.innerHTML = '';
+function createContainerMoviesOnLarge(
+    iterable,
+    container,
+    { lazyLoad = false, clean = true }
+) {
+    if (clean) {
+        container.innerHTML = '';
+    }
 
     iterable.forEach((i) => {
+        const movieContainer = document.createElement('div');
+        movieContainer.classList.add('movie-large');
+
+        const movieImg = document.createElement('img');
+        movieImg.setAttribute('id', i.id);
+        movieImg.setAttribute('alt', i.title);
+        movieImg.setAttribute('onClick', 'getMovie(this.id)');
+
         if (i.poster_path) {
-            container.innerHTML += `
-            <div class='movie-large'>
-                <img id='${i.id}' src='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
-            </div>
-        `;
+            movieImg.setAttribute(
+                lazyLoad ? 'data-img' : 'src',
+                `${BASE_URL_IMG}${i.poster_path}`
+            );
         } else {
-            container.innerHTML += `
-            <div class='movie-large'>
-                <img id='${i.id}' src='assets/no-image.avif' alt='${i.original_title}' onClick='getMovie(this.id)'/>
-            </div>
-        `;
+            movieImg.setAttribute('src', 'assets/no-image.avif');
         }
+
+        if (lazyLoad) {
+            lazyLoader.observe(movieImg);
+        }
+
+        movieContainer.appendChild(movieImg);
+        container.appendChild(movieContainer);
+        // if (clean) {
+        //     container.innerHTML = '';
+        // }
+
+        // iterable.forEach((i) => {
+        //     if (i.poster_path) {
+        //         container.innerHTML += `
+        //         <div class='movie-large'>
+        //             <img id='${i.id}' src='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
+        //         </div>
+        //     `;
+        //     } else {
+        //         container.innerHTML += `
+        //         <div class='movie-large'>
+        //             <img id='${i.id}' src='assets/no-image.avif' alt='${i.original_title}' onClick='getMovie(this.id)'/>
+        //         </div>
+        //     `;
+        //     }
     });
 }
 
@@ -245,7 +279,7 @@ async function getMoviesByGenrePreview(id) {
 }
 
 // GET Movies By Category
-async function getMoviesByGenre(id) {
+async function getMoviesByGenre(id, page = 1) {
     if (document.getElementById(id)) {
         let categoryName = document.getElementById(id).textContent;
         location.hash = `category=${id}-${categoryName}`;
@@ -258,13 +292,24 @@ async function getMoviesByGenre(id) {
     const { data } = await api('/discover/movie', {
         params: {
             with_genres: id,
+            page,
         },
     });
 
     movies = data.results;
 
-    createContainerMoviesOnLarge(movies, containerCategoryMovies);
+    createContainerMoviesOnLarge(movies, containerCategoryMovies, {
+        lazyLoad: true,
+        clean: page == 1,
+    });
+
     skeletonLoadingCategoryMovies.setAttribute('class', 'inactive');
+
+    const btnLoadMore = document.querySelector('#btn-more--category');
+
+    btnLoadMore.addEventListener('click', () => {
+        getMoviesByGenre(id, page + 1);
+    });
 }
 
 /* Trending */
@@ -292,19 +337,32 @@ async function getTrendingMoviesPreview() {
     skeletonLoadingTrendingMoviesPreview.setAttribute('class', 'inactive');
 }
 
-async function getTrendingMovies() {
+async function getTrendingMovies(page = 1) {
     location.hash = `#trends`;
     skeletonLoadingTrendingMovies.removeAttribute('class');
 
-    const { data } = await api('/trending/movie/day');
+    const { data } = await api('/trending/movie/day', {
+        params: {
+            page,
+        },
+    });
 
     subtitleTrendingMoviesAll.innerHTML = '';
     subtitleTrendingMoviesAll.innerHTML += 'Trending Movies';
 
     const movies = data.results;
 
-    createContainerMoviesOnLarge(movies, containerTrendingMovies);
+    createContainerMoviesOnLarge(movies, containerTrendingMovies, {
+        lazyLoad: true,
+        clean: page == 1,
+    });
     skeletonLoadingTrendingMovies.setAttribute('class', 'inactive');
+
+    const btnLoadMore = document.querySelector('#btn-more--trending');
+
+    btnLoadMore.addEventListener('click', () => {
+        getTrendingMovies(page + 1);
+    });
 }
 
 /* Movie */

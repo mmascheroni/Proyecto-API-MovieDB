@@ -112,7 +112,7 @@
                         <button class="btn-contract">🔺</button>
                         <button
                             class="btn-more btn-more--category"
-                            onclick="getMoviesByGenre(this.id)"
+                            onclick="getMoviesByGenre(this.id, 1)"
                         >
                             ➕
                         </button>
@@ -153,6 +153,7 @@
                     id="container-category--movies"
                     class="container-movies--large"
                 ></div>
+                <button id="btn-more--category" class="btn-more">➕</button>
             </article>
         </section>
         <!-- Categories All Movies -->
@@ -227,6 +228,7 @@
                     id="container-trending--movies"
                     class="container-movies--large"
                 ></div>
+                <button id="btn-more--trending" class="btn-more">➕</button>
             </article>
         </section>
         <!-- Trending All Movies -->

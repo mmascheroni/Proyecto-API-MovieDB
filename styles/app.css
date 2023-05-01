@@ -132,6 +132,11 @@ input {
     background-color: var(--black-colour2);
 }
 
+#category-movies {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
 /* Category Buttons */
 #container-categories--buttons,
 #container-category--preview,
@@ -266,6 +271,11 @@ img:hover {
 
 .btn-more--trending {
     margin-right: 10px !important;
+}
+
+#trending-movies {
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 /* Trending Movies */
