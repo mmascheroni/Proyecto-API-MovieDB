@@ -19,6 +19,7 @@ const containerCategoryBtnPreviewTop = $('.container-preview-buttons');
 // Container Movies
 const containerCategoryMoviesPreview = $('#container-category--preview');
 const containerCategoryMovies = $('#container-category--movies');
+const categoryPreviewTop = $('#category-preview--top');
 
 // Subtitle
 const categoryButtonsSubtitle = $('.subtitle-categories--button');

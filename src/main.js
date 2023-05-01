@@ -28,12 +28,6 @@ btnSearch.addEventListener('click', () => {
     subtitleSearchMovie.innerHTML = `Search: ${inputSearch.value}`;
 });
 
-// Btn - Contract -> Section Movies Category Preview
-btnContract.addEventListener('click', () => {
-    sectionCategoryMoviesPreview.setAttribute('class', 'inactive');
-    hideBtnCategorySelected();
-});
-
 // Btn - Back
 btnBack.addEventListener('click', () => {
     history.back();
@@ -51,6 +45,12 @@ const lazyLoader = new IntersectionObserver((entries) => {
         }
     });
 });
+
+// function btnContract
+function btnContractFun() {
+    sectionCategoryMoviesPreview.setAttribute('class', 'inactive');
+    hideBtnCategorySelected();
+}
 
 // Create Container with movies and scroll X
 function createContainerMoviesAndScrollX(
@@ -76,8 +76,6 @@ function createContainerMoviesAndScrollX(
             );
         } else {
             movieImg.setAttribute('src', 'assets/no-image.avif');
-            // movieImg.style.width = '300px';
-            // movieImg.style.height = '450px';
         }
 
         if (lazyLoad) {
@@ -200,30 +198,27 @@ async function getCategories() {
 
 // GET Movies by Category Preview
 async function getMoviesByGenrePreview(id) {
+    const genre = document.getElementById(`${id}`).textContent;
+
     // Remove a inactive class
     sectionCategoryMoviesPreview.removeAttribute('class');
     skeletonLoadingCategoryMoviesPreview.removeAttribute('class');
 
-    // Set a inactive class
-    btnContract.setAttribute('class', 'inactive');
-    btnMoreCategory.setAttribute('class', 'inactive');
-
-    const genre = document.getElementById(`${id}`).textContent;
-    btnMoreCategory.setAttribute('id', id);
-
     containerCategoryMoviesPreview.innerHTML = '';
     categoryPreviewSubititle.innerHTML = '';
+    containerCategoryBtnPreviewTop.innerHTML = '';
 
-    // Set Name in Container Category Movies on container Large
+    //categorySubtitle
     categorySubtitle.innerHTML = '';
     categorySubtitle.innerHTML = `Categoria: ${genre}`;
 
-    const res = await fetch(
-        `${BASE_URL}${URL_GENRE}?api_key=${API_KEY}&with_genres=${id}`
-    );
-    const data = await res.json();
+    const { data } = await api('/discover/movie', {
+        params: {
+            with_genres: id,
+        },
+    });
 
-    const movies = data.results;
+    movies = data.results;
 
     // Hide Skeleton Loadint Category Movies Preview
     skeletonLoadingCategoryMoviesPreview.setAttribute('class', 'inactive');
@@ -237,23 +232,36 @@ async function getMoviesByGenrePreview(id) {
     // Set Name in Container Category Movies Preview
     categoryPreviewSubititle.innerHTML += `Categoria: ${genre}`;
 
-    // Show the buttons, quit the inactive class
-    btnMoreCategory.setAttribute('class', 'btn-more', 'btn-more--category');
-    btnContract.setAttribute('class', 'btn-contract');
+    containerCategoryBtnPreviewTop.innerHTML = `
+                        <button class="btn-contract" onclick="btnContractFun()">🔺</button>
+                        <button
+                            id='${id}'
+                            class="btn-more btn-more--category"
+                            onclick="getMoviesByGenre(this.id)"
+                        >
+                            ➕
+                        </button>
+                        `;
 }
 
 // GET Movies By Category
 async function getMoviesByGenre(id) {
-    location.hash = `#category=${id}`;
-    skeletonLoadingCategoryMovies.removeAttribute('class');
+    if (document.getElementById(id)) {
+        let categoryName = document.getElementById(id).textContent;
+        location.hash = `category=${id}-${categoryName}`;
+    }
 
-    const res = await fetch(
-        `${BASE_URL}${URL_GENRE}?api_key=${API_KEY}&with_genres=${id}`
-    );
+    const [_, query] = location.hash.split('-');
+    categorySubtitle.innerHTML = '';
+    categorySubtitle.innerHTML = decodeURI(query);
 
-    const data = await res.json();
+    const { data } = await api('/discover/movie', {
+        params: {
+            with_genres: id,
+        },
+    });
 
-    const movies = data.results;
+    movies = data.results;
 
     createContainerMoviesOnLarge(movies, containerCategoryMovies);
     skeletonLoadingCategoryMovies.setAttribute('class', 'inactive');
