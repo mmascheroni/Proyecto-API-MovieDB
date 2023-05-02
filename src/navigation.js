@@ -53,8 +53,9 @@ function categoriesPage() {
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
 
-    // const [_, query] = location.hash.split('=');
-    // getMoviesByGenre(query);
+    const categoryId = getCategoryIdOnLocationHash();
+
+    getMoviesByGenre(categoryId);
 }
 
 function trendsPage() {
@@ -93,6 +94,9 @@ function searchPage() {
     sectionTrendingMovies.setAttribute('class', 'inactive');
     // Movie Details
     sectionMovieDetails.setAttribute('class', 'inactive');
+
+    const querySearch = returnSearchMovieWhenInputSearchIsEmpty();
+    getMovieBySearch(querySearch);
 }
 
 function movieDetailsPage() {
@@ -112,6 +116,5 @@ function movieDetailsPage() {
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
 
-    const [_, query] = location.hash.split('=');
     getMovie(query);
 }

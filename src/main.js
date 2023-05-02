@@ -44,6 +44,36 @@ const lazyLoader = new IntersectionObserver((entries) => {
     });
 });
 
+function getCategoryIdOnLocationHash() {
+    const currentHash = decodeURI(location.hash);
+
+    const currentHashSplit = currentHash.split('=');
+    console.log(currentHashSplit);
+    const [categoryId, _] = currentHashSplit[1].split('-');
+    console.log(categoryId);
+
+    return categoryId;
+}
+
+function getInputSearchOnLocationHash() {
+    const currentHash = decodeURI(location.hash);
+
+    const [_, query] = currentHash.split('=');
+
+    return query;
+}
+
+function returnSearchMovieWhenInputSearchIsEmpty() {
+    const querySearch = inputSearch.value;
+
+    if (querySearch) {
+        return querySearch;
+    } else {
+        const [_, querySearchLocation] = location.hash.split('=');
+        return querySearchLocation;
+    }
+}
+
 // function btnContract
 function btnContractFun() {
     sectionCategoryMoviesPreview.setAttribute('class', 'inactive');
@@ -262,12 +292,11 @@ async function getMoviesByGenre(id, page = 1) {
     if (document.getElementById(id)) {
         let category = document.getElementById(id);
         let categoryName = category.textContent;
-        let categoryId = category.id;
-
         location.hash = `category=${id}-${categoryName}`;
     }
 
-    const [_, query] = location.hash.split('-');
+    const [__, query] = location.hash.split('-');
+
     categorySubtitle.innerHTML = '';
     categorySubtitle.innerHTML = decodeURI(query);
 
@@ -297,11 +326,9 @@ async function getMoviesByGenre(id, page = 1) {
         btnLoadMoreCategory.appendChild(btnLoadMore);
     }
 
-    // const btnLoadMore = document.querySelector('#btn-more--trending');
-
     btnLoadMore.addEventListener('click', () => {
-        getMoviesByGenre(id, page + 1);
-        console.log(id);
+        const categoryId = getCategoryIdOnLocationHash();
+        getMoviesByGenre(categoryId, page + 1);
         btnLoadMore.remove();
     });
 }
@@ -405,6 +432,7 @@ async function GetSimilarMovies(id) {
 /* Search Movie */
 async function getMovieBySearch(query, page = 1) {
     location.hash = `#search=${query}`;
+
     skeletonLoadingSearchMovie.removeAttribute('class');
 
     const { data } = await api('/search/movie', {
@@ -434,7 +462,8 @@ async function getMovieBySearch(query, page = 1) {
     }
 
     btnLoadMore.addEventListener('click', () => {
-        getMovieBySearch(query, page + 1);
+        const querySearch = returnSearchMovieWhenInputSearchIsEmpty();
+        getMovieBySearch(querySearch, page + 1);
         btnLoadMore.remove();
     });
 }
