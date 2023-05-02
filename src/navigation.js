@@ -54,7 +54,6 @@ function categoriesPage() {
     sectionSearchMovie.setAttribute('class', 'inactive');
 
     const categoryId = getCategoryIdOnLocationHash();
-
     getMoviesByGenre(categoryId);
 }
 
@@ -116,5 +115,6 @@ function movieDetailsPage() {
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
 
+    const [_, query] = location.hash.split('=');
     getMovie(query);
 }
