@@ -23,13 +23,11 @@ const api = axios.create({
 //BTN - Search Movie
 btnSearch.addEventListener('click', () => {
     getMovieBySearch(inputSearch.value);
-
-    subtitleSearchMovie.innerHTML = '';
-    subtitleSearchMovie.innerHTML = `Search: ${inputSearch.value}`;
 });
 
 // Btn - Back
 btnBack.addEventListener('click', () => {
+    location.reload();
     history.back();
 });
 
@@ -111,15 +109,14 @@ function createContainerMoviesOnLarge(
         movieImg.setAttribute('id', i.id);
         movieImg.setAttribute('alt', i.title);
         movieImg.setAttribute('onClick', 'getMovie(this.id)');
+        movieImg.setAttribute(
+            lazyLoad ? 'data-img' : 'src',
+            `${BASE_URL_IMG}${i.poster_path}`
+        );
 
-        if (i.poster_path) {
-            movieImg.setAttribute(
-                lazyLoad ? 'data-img' : 'src',
-                `${BASE_URL_IMG}${i.poster_path}`
-            );
-        } else {
+        movieImg.addEventListener('error', () => {
             movieImg.setAttribute('src', 'assets/no-image.avif');
-        }
+        });
 
         if (lazyLoad) {
             lazyLoader.observe(movieImg);
@@ -127,24 +124,6 @@ function createContainerMoviesOnLarge(
 
         movieContainer.appendChild(movieImg);
         container.appendChild(movieContainer);
-        // if (clean) {
-        //     container.innerHTML = '';
-        // }
-
-        // iterable.forEach((i) => {
-        //     if (i.poster_path) {
-        //         container.innerHTML += `
-        //         <div class='movie-large'>
-        //             <img id='${i.id}' src='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
-        //         </div>
-        //     `;
-        //     } else {
-        //         container.innerHTML += `
-        //         <div class='movie-large'>
-        //             <img id='${i.id}' src='assets/no-image.avif' alt='${i.original_title}' onClick='getMovie(this.id)'/>
-        //         </div>
-        //     `;
-        //     }
     });
 }
 
@@ -281,7 +260,10 @@ async function getMoviesByGenrePreview(id) {
 // GET Movies By Category
 async function getMoviesByGenre(id, page = 1) {
     if (document.getElementById(id)) {
-        let categoryName = document.getElementById(id).textContent;
+        let category = document.getElementById(id);
+        let categoryName = category.textContent;
+        let categoryId = category.id;
+
         location.hash = `category=${id}-${categoryName}`;
     }
 
@@ -307,14 +289,19 @@ async function getMoviesByGenre(id, page = 1) {
 
     const btnLoadMore = document.createElement('button');
     btnLoadMore.innerText = '➕';
-    btnLoadMore.classList.add('btn-more');
+    btnLoadMore.classList.add('btn-more', 'btn-load--category');
 
-    containerCategoryMovies.appendChild(btnLoadMore);
+    const existButton = document.querySelector('.btn-load--category');
+
+    if (!existButton) {
+        btnLoadMoreCategory.appendChild(btnLoadMore);
+    }
 
     // const btnLoadMore = document.querySelector('#btn-more--trending');
 
     btnLoadMore.addEventListener('click', () => {
-        getTrendingMovies(page + 1);
+        getMoviesByGenre(id, page + 1);
+        console.log(id);
         btnLoadMore.remove();
     });
 }
@@ -367,9 +354,13 @@ async function getTrendingMovies(page = 1) {
 
     const btnLoadMore = document.createElement('button');
     btnLoadMore.innerText = '➕';
-    btnLoadMore.classList.add('btn-more');
+    btnLoadMore.classList.add('btn-more', 'btn-load--trending');
 
-    containerTrendingMovies.appendChild(btnLoadMore);
+    const existButton = document.querySelector('.btn-load--trending');
+
+    if (!existButton) {
+        btnLoadMoreTrending.appendChild(btnLoadMore);
+    }
 
     // const btnLoadMore = document.querySelector('#btn-more--trending');
 
@@ -412,20 +403,38 @@ async function GetSimilarMovies(id) {
 }
 
 /* Search Movie */
-async function getMovieBySearch(query) {
+async function getMovieBySearch(query, page = 1) {
     location.hash = `#search=${query}`;
     skeletonLoadingSearchMovie.removeAttribute('class');
 
     const { data } = await api('/search/movie', {
         params: {
             query,
+            page,
         },
     });
 
     const movies = data.results;
 
-    console.log(movies);
+    createContainerMoviesOnLarge(movies, containerSearchMovies, {
+        lazyLoad: true,
+        clean: page == 1,
+    });
 
-    createContainerMoviesOnLarge(movies, containerSearchMovies);
     skeletonLoadingSearchMovie.setAttribute('class', 'inactive');
+
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = '➕';
+    btnLoadMore.classList.add('btn-more', 'btn-load--search');
+
+    const existButton = document.querySelector('.btn-load--search');
+
+    if (!existButton) {
+        btnLoadMoreSearch.appendChild(btnLoadMore);
+    }
+
+    btnLoadMore.addEventListener('click', () => {
+        getMovieBySearch(query, page + 1);
+        btnLoadMore.remove();
+    });
 }

@@ -20,6 +20,7 @@ const containerCategoryBtnPreviewTop = $('.container-preview-buttons');
 const containerCategoryMoviesPreview = $('#container-category--preview');
 const containerCategoryMovies = $('#container-category--movies');
 const categoryPreviewTop = $('#category-preview--top');
+const articleCategoryMovies = $('#article-category--movies');
 
 // Subtitle
 const categoryButtonsSubtitle = $('.subtitle-categories--button');
@@ -41,6 +42,7 @@ const sectionTrendingMovies = $('#trending-movies');
 // Container Movies
 const containerTrendingMoviesPreview = $('#container-trending--preview');
 const containerTrendingMovies = $('#container-trending--movies');
+const articleTrendingMovies = $('#article-trending--movies');
 
 // Container Trending Preview Top
 const containerBtnMoreTrendingPreviewTop = $('.trending-preview--top');
@@ -72,6 +74,7 @@ const sectionSearchMovie = $('#search-movies');
 
 // Container Movies
 const containerSearchMovies = $('#container-search--movies');
+const articleSearchMovie = $('#article-search--movies');
 
 // Subtitle
 const subtitleSearchMovie = $('.subtitle-search--movies');
@@ -99,3 +102,7 @@ const skeletonMovieDetails = $('#skeleton-movies--details');
 
 /* SKeleton Search Movie */
 const skeletonLoadingSearchMovie = $('#skeleton-search--movies');
+
+const btnLoadMoreTrending = $('.button-load--moreTrending');
+const btnLoadMoreCategory = $('.button-load--moreCategory');
+const btnLoadMoreSearch = $('.btn-load--moreSearch');

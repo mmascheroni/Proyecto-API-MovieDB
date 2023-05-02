@@ -110,6 +110,7 @@ input {
     font-size: 12px;
     padding-left: 16px;
     height: 18px;
+    padding: 12px;
 }
 
 #input-movie--search {
@@ -132,7 +133,9 @@ input {
     background-color: var(--black-colour2);
 }
 
-#category-movies {
+.button-load--moreTrending,
+.button-load--moreCategory,
+.btn-load--moreSearch {
     text-align: center;
     padding-bottom: 20px;
 }

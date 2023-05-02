@@ -53,8 +53,8 @@ function categoriesPage() {
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
 
-    const [_, query] = location.hash.split('=');
-    getMoviesByGenre(query);
+    // const [_, query] = location.hash.split('=');
+    // getMoviesByGenre(query);
 }
 
 function trendsPage() {
@@ -93,9 +93,6 @@ function searchPage() {
     sectionTrendingMovies.setAttribute('class', 'inactive');
     // Movie Details
     sectionMovieDetails.setAttribute('class', 'inactive');
-
-    const [_, query] = location.hash.split('=');
-    getMovieBySearch(query);
 }
 
 function movieDetailsPage() {
