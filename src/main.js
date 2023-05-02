@@ -305,10 +305,17 @@ async function getMoviesByGenre(id, page = 1) {
 
     skeletonLoadingCategoryMovies.setAttribute('class', 'inactive');
 
-    const btnLoadMore = document.querySelector('#btn-more--category');
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = '➕';
+    btnLoadMore.classList.add('btn-more');
+
+    containerCategoryMovies.appendChild(btnLoadMore);
+
+    // const btnLoadMore = document.querySelector('#btn-more--trending');
 
     btnLoadMore.addEventListener('click', () => {
-        getMoviesByGenre(id, page + 1);
+        getTrendingMovies(page + 1);
+        btnLoadMore.remove();
     });
 }
 
@@ -358,10 +365,17 @@ async function getTrendingMovies(page = 1) {
     });
     skeletonLoadingTrendingMovies.setAttribute('class', 'inactive');
 
-    const btnLoadMore = document.querySelector('#btn-more--trending');
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = '➕';
+    btnLoadMore.classList.add('btn-more');
+
+    containerTrendingMovies.appendChild(btnLoadMore);
+
+    // const btnLoadMore = document.querySelector('#btn-more--trending');
 
     btnLoadMore.addEventListener('click', () => {
         getTrendingMovies(page + 1);
+        btnLoadMore.remove();
     });
 }
 
