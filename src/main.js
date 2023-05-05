@@ -20,15 +20,36 @@ const api = axios.create({
 });
 
 // Events
+// Title
+title.addEventListener('click', () => {
+    location.hash = '';
+    homePage();
+});
+
+// Btn - Home
+btnHome.addEventListener('click', () => {
+    location.hash = '';
+    homePage();
+});
+
+// Btn - Back
+btnBack.addEventListener('click', () => {
+    history.back();
+});
+
 //BTN - Search Movie
 btnSearch.addEventListener('click', () => {
     getMovieBySearch(inputSearch.value);
 });
 
-// Btn - Back
-btnBack.addEventListener('click', () => {
-    location.reload();
-    history.back();
+formSearch.addEventListener('submit', (e) => {
+    e.preventDefault();
+});
+
+inputSearch.addEventListener('keyup', function (e) {
+    if (e.key == 'Enter' || e.key == 'enter') {
+        getMovieBySearch(inputSearch.value);
+    }
 });
 
 // Functions

@@ -22,6 +22,7 @@ function homePage() {
     getCategories();
 
     containerBtnBack.setAttribute('class', 'inactive');
+    containerBtnHome.setAttribute('class', 'inactive');
     sectionCategoryButtons.removeAttribute('class');
     sectionTrendingMoviesPreview.removeAttribute('class');
 
@@ -40,6 +41,7 @@ function categoriesPage() {
     window.scrollTo(0, 0);
 
     containerBtnBack.removeAttribute('class');
+    containerBtnHome.setAttribute('class', 'inactive');
     // Category
     sectionCategoryMovies.removeAttribute('class');
 
@@ -61,6 +63,7 @@ function trendsPage() {
     window.scrollTo(0, 0);
 
     containerBtnBack.removeAttribute('class');
+    containerBtnHome.setAttribute('class', 'inactive');
     // Category
     sectionTrendingMovies.removeAttribute('class');
 
@@ -83,7 +86,8 @@ function searchPage() {
     //Search Movie
     sectionSearchMovie.removeAttribute('class');
 
-    containerBtnBack.removeAttribute('class');
+    containerBtnBack.setAttribute('class', 'inactive');
+    containerBtnHome.removeAttribute('class');
     // Category
     sectionCategoryMovies.setAttribute('class', 'inactive');
     sectionCategoryButtons.setAttribute('class', 'inactive');
@@ -102,6 +106,7 @@ function movieDetailsPage() {
     window.scrollTo(0, 0);
 
     containerBtnBack.removeAttribute('class');
+    containerBtnHome.setAttribute('class', 'inactive');
     // Movie Details
     sectionMovieDetails.removeAttribute('class');
 

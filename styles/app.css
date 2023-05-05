@@ -77,6 +77,14 @@ img {
     color: #000000;
 }
 
+.btn-home {
+    background-color: var(--black-colour);
+    color: white;
+    margin-top: 10px;
+    padding: 5px;
+    font-weight: bolder;
+}
+
 .container-movies--large {
     display: flex;
     flex-wrap: wrap;
@@ -117,7 +125,9 @@ input {
     width: 200px;
 }
 
-#container-button--back {
+#container-button--back,
+#container-button--home {
+    background-color: var(--black-colour2);
     padding: 12px 0 12px 30px;
 }
 
@@ -594,7 +604,8 @@ footer {
 
     .btn-more,
     .btn-contract,
-    .btn-back {
+    .btn-back,
+    .btn-home {
         font-size: 18px;
         padding: 8px;
     }

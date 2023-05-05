@@ -1,9 +1,15 @@
 const $ = (id) => document.querySelector(id);
+const $Id = (id) => document.getElementById(id);
+
+const title = $Id('title');
 
 /* Container Button Back */
 const containerBtnBack = $('#container-button--back');
-
 const btnBack = $('.btn-back');
+
+/* Container Button Home */
+const containerBtnHome = $('#container-button--home');
+const btnHome = $('.btn-home');
 
 /* Category */
 
@@ -79,8 +85,10 @@ const articleSearchMovie = $('#article-search--movies');
 // Subtitle
 const subtitleSearchMovie = $('.subtitle-search--movies');
 
+// Form Search
+const formSearch = $Id('form-search');
 // Input Search
-const inputSearch = $('#input-movie--search');
+const inputSearch = $Id('input-movie--search');
 
 // Btn Search
 const btnSearch = $('.btn-search');
