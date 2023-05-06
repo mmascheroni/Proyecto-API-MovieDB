@@ -65,6 +65,18 @@ const lazyLoader = new IntersectionObserver((entries) => {
     });
 });
 
+function likeMovie(movie) {
+    const likedMovies = JSON.parse(localStorage.getItem('liked_movies')) || {};
+
+    if (likedMovies[movie.id]) {
+        likedMovies[movie.id] = undefined;
+    } else {
+        likedMovies[movie.id] = movie;
+    }
+
+    localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+}
+
 function getCategoryIdOnLocationHash() {
     const currentHash = decodeURI(location.hash);
 
@@ -118,6 +130,35 @@ function createContainerMoviesAndScrollX(
         movieImg.setAttribute('alt', i.title);
         movieImg.setAttribute('onClick', 'getMovie(this.id)');
 
+        const addToMyListBtn = document.createElement('button');
+        addToMyListBtn.innerText = '➕';
+        addToMyListBtn.setAttribute('class', 'btn-more btn-add--myList');
+        addToMyListBtn.setAttribute('id', i.id);
+
+        const listMovies =
+            JSON.parse(localStorage.getItem('liked_movies')) || {};
+        if (listMovies[addToMyListBtn.id]) {
+            addToMyListBtn.innerHTML = '';
+            addToMyListBtn.innerHTML = '✔️';
+        }
+
+        addToMyListBtn.addEventListener('click', (e) => {
+            addToMyListBtn.classList.toggle('btn-add--clicked');
+
+            if (addToMyListBtn.classList.contains('btn-add--clicked')) {
+                addToMyListBtn.innerHTML = '';
+                addToMyListBtn.innerHTML = '✔️';
+
+                likeMovie(i);
+            } else {
+                addToMyListBtn.innerHTML = '';
+                addToMyListBtn.innerHTML = '➕';
+                likeMovie(i);
+            }
+
+            getMoviesFromMyList();
+        });
+
         if (i.poster_path) {
             movieImg.setAttribute(
                 lazyLoad ? 'data-img' : 'src',
@@ -132,13 +173,8 @@ function createContainerMoviesAndScrollX(
         }
 
         movieContainer.appendChild(movieImg);
+        movieContainer.appendChild(addToMyListBtn);
         container.appendChild(movieContainer);
-
-        // container.innerHTML += `
-        //     <div class='movie'>
-        //         <img id='${i.id}' data-img='${BASE_URL_IMG}${i.poster_path}' alt='${i.original_title}' onClick='getMovie(this.id)'/>
-        //     </div>
-        // `;
     });
 }
 
@@ -169,11 +205,41 @@ function createContainerMoviesOnLarge(
             movieImg.setAttribute('src', 'assets/no-image.avif');
         });
 
+        const addToMyListBtn = document.createElement('button');
+        addToMyListBtn.innerText = '➕';
+        addToMyListBtn.setAttribute('class', 'btn-more btn-add--myListLarge');
+        addToMyListBtn.setAttribute('id', i.id);
+
+        const listMovies =
+            JSON.parse(localStorage.getItem('liked_movies')) || {};
+        if (listMovies[addToMyListBtn.id]) {
+            addToMyListBtn.innerHTML = '';
+            addToMyListBtn.innerHTML = '✔️';
+        }
+
+        addToMyListBtn.addEventListener('click', (e) => {
+            addToMyListBtn.classList.toggle('btn-add--clicked');
+
+            if (addToMyListBtn.classList.contains('btn-add--clicked')) {
+                addToMyListBtn.innerHTML = '';
+                addToMyListBtn.innerHTML = '✔️';
+
+                likeMovie(i);
+            } else {
+                addToMyListBtn.innerHTML = '';
+                addToMyListBtn.innerHTML = '➕';
+                likeMovie(i);
+            }
+
+            getMoviesFromMyList();
+        });
+
         if (lazyLoad) {
             lazyLoader.observe(movieImg);
         }
 
         movieContainer.appendChild(movieImg);
+        movieContainer.appendChild(addToMyListBtn);
         container.appendChild(movieContainer);
     });
 }
@@ -183,19 +249,74 @@ function createContainerMovieDetails(movie, container, subtitle) {
 
     subtitle.innerHTML = `${movie.title}`;
 
-    container.innerHTML += `
-            <img id='${movie.id}' src='https://image.tmdb.org/t/p/w500/${
-        movie.poster_path
-    }' class='img-movie--details' alt='${
-        movie.original_title
-    }' onClick='getMovie(this.id)'>
-            <div class='container-description'>
-                <p><b class='descritpion-movie'>Descripcion:</b> ${
-                    movie.overview
-                }</p>
-                <p>⭐ ${movie.vote_average.toFixed(1)}</p>
-            </div>
-                `;
+    const containerImageBtn = document.createElement('div');
+    containerImageBtn.setAttribute('class', 'container-movie--imgBtn');
+
+    const movieImg = document.createElement('img');
+    movieImg.setAttribute('id', movie.id);
+    movieImg.setAttribute('class', 'img-movie--details');
+    movieImg.setAttribute('alt', movie.title);
+    movieImg.setAttribute('onClick', 'getMovie(this.id)');
+    movieImg.setAttribute('src', `${BASE_URL_IMG}${movie.poster_path}`);
+
+    const addToMyListBtn = document.createElement('button');
+    addToMyListBtn.innerText = '➕';
+    addToMyListBtn.setAttribute('class', 'btn-more  btn-add--myListMovie');
+    addToMyListBtn.setAttribute('id', movie.id);
+
+    const containerDescription = document.createElement('div');
+    containerDescription.setAttribute('class', 'container-description');
+
+    const pDescription = document.createElement('p');
+    pDescription.innerHTML = `<b class='descritpion-movie'>Descripcion:</b> ${movie.overview}`;
+
+    const pAverage = document.createElement('p');
+    pAverage.innerText = `⭐ ${movie.vote_average.toFixed(1)}`;
+
+    const listMovies = JSON.parse(localStorage.getItem('liked_movies')) || {};
+    if (listMovies[addToMyListBtn.id]) {
+        addToMyListBtn.innerHTML = '';
+        addToMyListBtn.innerHTML = '✔️';
+    }
+
+    addToMyListBtn.addEventListener('click', (e) => {
+        addToMyListBtn.classList.toggle('btn-add--clicked');
+
+        if (addToMyListBtn.classList.contains('btn-add--clicked')) {
+            addToMyListBtn.innerHTML = '';
+            addToMyListBtn.innerHTML = '✔️';
+
+            likeMovie(movie);
+        } else {
+            addToMyListBtn.innerHTML = '';
+            addToMyListBtn.innerHTML = '➕';
+            likeMovie(movie);
+        }
+
+        getMoviesFromMyList();
+        sectionMyListMovies.setAttribute('class', 'inactive');
+    });
+
+    containerImageBtn.appendChild(movieImg);
+    containerImageBtn.appendChild(addToMyListBtn);
+    container.appendChild(containerImageBtn);
+    containerDescription.appendChild(pDescription);
+    containerDescription.appendChild(pAverage);
+    container.appendChild(containerDescription);
+
+    // container.innerHTML += `
+    //         <img id='${movie.id}' src='https://image.tmdb.org/t/p/w500/${
+    //     movie.poster_path
+    // }' class='img-movie--details' alt='${
+    //     movie.original_title
+    // }' onClick='getMovie(this.id)'>
+    //         <div class='container-description'>
+    //             <p><b class='descritpion-movie'>Descripcion:</b> ${
+    //                 movie.overview
+    //             }</p>
+    //             <p>⭐ ${movie.vote_average.toFixed(1)}</p>
+    //         </div>
+    //             `;
 }
 
 // Hide Button Category Selection
@@ -329,6 +450,7 @@ async function getMoviesByGenre(id, page = 1) {
     });
 
     movies = data.results;
+    const totalPages = data.total_pages;
 
     createContainerMoviesOnLarge(movies, containerCategoryMovies, {
         lazyLoad: true,
@@ -348,9 +470,22 @@ async function getMoviesByGenre(id, page = 1) {
     }
 
     btnLoadMore.addEventListener('click', () => {
-        const categoryId = getCategoryIdOnLocationHash();
-        getMoviesByGenre(categoryId, page + 1);
-        btnLoadMore.remove();
+        if (page >= totalPages) {
+            const p = document.createElement('p');
+            p.setAttribute('class', 'p-mensaje--limite');
+            p.innerHTML = 'No hay mas resultado!';
+            p.style.color = 'white';
+            p.style.fontSize = '25px';
+            p.style.paddingBottom = '20px';
+            sectionSearchMovie.style.textAlign = 'center';
+
+            btnLoadMore.remove();
+            sectionSearchMovie.appendChild(p);
+        } else {
+            const categoryId = getCategoryIdOnLocationHash();
+            getMoviesByGenre(categoryId, page + 1);
+            btnLoadMore.remove();
+        }
     });
 }
 
@@ -383,6 +518,10 @@ async function getTrendingMovies(page = 1) {
     location.hash = `#trends`;
     skeletonLoadingTrendingMovies.removeAttribute('class');
 
+    if (document.querySelector('.p-mensaje--limite')) {
+        document.querySelector('.p-mensaje--limite').remove();
+    }
+
     const { data } = await api('/trending/movie/day', {
         params: {
             page,
@@ -393,6 +532,8 @@ async function getTrendingMovies(page = 1) {
     subtitleTrendingMoviesAll.innerHTML += 'Trending Movies';
 
     const movies = data.results;
+
+    const totalPages = data.total_pages;
 
     createContainerMoviesOnLarge(movies, containerTrendingMovies, {
         lazyLoad: true,
@@ -413,8 +554,21 @@ async function getTrendingMovies(page = 1) {
     // const btnLoadMore = document.querySelector('#btn-more--trending');
 
     btnLoadMore.addEventListener('click', () => {
-        getTrendingMovies(page + 1);
-        btnLoadMore.remove();
+        if (page >= totalPages) {
+            const p = document.createElement('p');
+            p.setAttribute('class', 'p-mensaje--limite');
+            p.innerHTML = 'No hay mas resultado!';
+            p.style.color = 'white';
+            p.style.fontSize = '25px';
+            p.style.paddingBottom = '20px';
+            sectionSearchMovie.style.textAlign = 'center';
+
+            btnLoadMore.remove();
+            sectionSearchMovie.appendChild(p);
+        } else {
+            getTrendingMovies(page + 1);
+            btnLoadMore.remove();
+        }
     });
 }
 
@@ -454,6 +608,10 @@ async function GetSimilarMovies(id) {
 async function getMovieBySearch(query, page = 1) {
     location.hash = `#search=${query}`;
 
+    if (document.querySelector('.p-mensaje--limite')) {
+        document.querySelector('.p-mensaje--limite').remove();
+    }
+
     skeletonLoadingSearchMovie.removeAttribute('class');
 
     const { data } = await api('/search/movie', {
@@ -464,6 +622,7 @@ async function getMovieBySearch(query, page = 1) {
     });
 
     const movies = data.results;
+    const totalPages = data.total_pages;
 
     createContainerMoviesOnLarge(movies, containerSearchMovies, {
         lazyLoad: true,
@@ -482,9 +641,52 @@ async function getMovieBySearch(query, page = 1) {
         btnLoadMoreSearch.appendChild(btnLoadMore);
     }
 
+    console.log(data);
+
     btnLoadMore.addEventListener('click', () => {
-        const querySearch = returnSearchMovieWhenInputSearchIsEmpty();
-        getMovieBySearch(querySearch, page + 1);
-        btnLoadMore.remove();
+        if (page >= totalPages) {
+            const p = document.createElement('p');
+            p.setAttribute('class', 'p-mensaje--limite');
+            p.innerHTML = 'No hay mas resultado!';
+            p.style.color = 'white';
+            p.style.fontSize = '25px';
+            p.style.paddingBottom = '20px';
+            sectionSearchMovie.style.textAlign = 'center';
+
+            btnLoadMore.remove();
+            sectionSearchMovie.appendChild(p);
+        } else {
+            const querySearch = returnSearchMovieWhenInputSearchIsEmpty();
+            getMovieBySearch(querySearch, page + 1);
+            btnLoadMore.remove();
+        }
     });
+}
+
+function removeClassInactive(container) {
+    container.removeAttribute('class');
+}
+
+function getMoviesFromMyList() {
+    containerMyListMovies.setAttribute('class', 'inactive');
+    skeletonLoadingMyListMovies.removeAttribute('class');
+
+    const listMovies = JSON.parse(localStorage.getItem('liked_movies')) || {};
+
+    subtitleMyListMovies.innerHTML = '';
+    subtitleMyListMovies.innerHTML = 'Mi Lista';
+
+    if (listMovies == {}) {
+        sectionMyListMovies.setAttribute('class', 'inactive');
+    } else {
+        sectionMyListMovies.removeAttribute('class');
+        createContainerMoviesAndScrollX(
+            Object.values(listMovies),
+            containerMyListMovies,
+            true
+        );
+        removeClassInactive(containerMyListMovies);
+    }
+
+    skeletonLoadingMyListMovies.setAttribute('class', 'inactive');
 }

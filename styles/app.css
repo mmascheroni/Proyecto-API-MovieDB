@@ -85,6 +85,50 @@ img {
     font-weight: bolder;
 }
 
+.movie,
+.movie-large {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.movie-large {
+    margin-bottom: 30px;
+}
+
+.btn-add--myList {
+    position: absolute;
+    display: block;
+    margin: 0 auto;
+    margin-top: -18px;
+    left: 42%;
+}
+
+.btn-add--myListLarge {
+    position: absolute;
+    margin: 0 auto;
+    left: 80%;
+    margin-top: 10px;
+    opacity: 85%;
+    background-color: white;
+}
+
+.container-movie--imgBtn {
+    position: relative;
+    padding-bottom: 50px;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.btn-add--myListMovie {
+    position: absolute;
+    margin: 0 auto;
+    left: 80%;
+    margin-top: 10px;
+    opacity: 85%;
+    background-color: white;
+}
+
 .container-movies--large {
     display: flex;
     flex-wrap: wrap;
@@ -139,7 +183,8 @@ input {
 #category-movies,
 #trending-movies,
 #container-button--back,
-#search-movies {
+#search-movies,
+#myList-movies {
     background-color: var(--black-colour2);
 }
 
@@ -153,7 +198,8 @@ input {
 /* Category Buttons */
 #container-categories--buttons,
 #container-category--preview,
-#container-similar--movies {
+#container-similar--movies,
+#container-MyList--movies {
     padding: 10px;
     overflow-x: scroll;
     scrollbar-color: #666666 #ece0e0;
@@ -163,19 +209,22 @@ input {
 
 #container-categories--buttons::-webkit-scrollbar,
 #container-category--preview::-webkit-scrollbar,
-#container-similar--movies::-webkit-scrollbar {
+#container-similar--movies::-webkit-scrollbar,
+#container-MyList--movies::-webkit-scrollbar {
     width: 10px;
 }
 
 #container-categories--buttons::-webkit-scrollbar-track,
 #container-category--preview::-webkit-scrollbar-track,
-#container-similar--movies::-webkit-scrollbar-track {
+#container-similar--movies::-webkit-scrollbar-track,
+#container-MyList--movies::-webkit-scrollbar-track {
     background-color: #555454;
 }
 
 #container-categories--buttons::-webkit-scrollbar-thumb,
 #container-category--preview::-webkit-scrollbar-thumb,
-#container-similar--movies::-webkit-scrollbar-thumb {
+#container-similar--movies::-webkit-scrollbar-thumb,
+#container-MyList--movies::-webkit-scrollbar-thumb {
     background-color: #ffffff;
 }
 
@@ -354,14 +403,16 @@ footer {
 
 #skeleton-category--buttons,
 #skeleton-trending--preview,
-#skeleton-category--preview {
+#skeleton-category--preview,
+#skeleton-myList--movies {
     padding: 40px 10px 20px 10px;
     overflow-x: scroll;
     white-space: nowrap;
 }
 
 #container-skeletonTrending--preview,
-#container-skeletonCategory--preview {
+#container-skeletonCategory--preview,
+#container-skeletonMyList--movies {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
@@ -372,7 +423,8 @@ footer {
 #skeleton-trending--preview::-webkit-scrollbar,
 #container-skeletonTrending--preview::-webkit-scrollbar,
 #skeleton-category--preview::-webkit-scrollbar,
-#container-skeletonCategory--preview::-webkit-scrollbar {
+#container-skeletonCategory--preview::-webkit-scrollbar,
+#container-skeletonMyList--movies::-webkit-scrollbar {
     display: none;
 }
 
@@ -668,5 +720,9 @@ footer {
 
     footer {
         height: 70px;
+    }
+
+    .btn-add--myList {
+        margin-top: -20px;
     }
 }

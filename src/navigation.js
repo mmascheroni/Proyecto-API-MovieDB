@@ -21,6 +21,8 @@ function homePage() {
 
     getCategories();
 
+    getMoviesFromMyList();
+
     containerBtnBack.setAttribute('class', 'inactive');
     containerBtnHome.setAttribute('class', 'inactive');
     sectionCategoryButtons.removeAttribute('class');
@@ -55,6 +57,8 @@ function categoriesPage() {
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
 
+    sectionMyListMovies.setAttribute('class', 'inactive');
+
     const categoryId = getCategoryIdOnLocationHash();
     getMoviesByGenre(categoryId);
 }
@@ -77,6 +81,8 @@ function trendsPage() {
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
 
+    sectionMyListMovies.setAttribute('class', 'inactive');
+
     getTrendingMovies();
 }
 
@@ -97,6 +103,8 @@ function searchPage() {
     sectionTrendingMovies.setAttribute('class', 'inactive');
     // Movie Details
     sectionMovieDetails.setAttribute('class', 'inactive');
+
+    sectionMyListMovies.setAttribute('class', 'inactive');
 
     const querySearch = returnSearchMovieWhenInputSearchIsEmpty();
     getMovieBySearch(querySearch);
@@ -119,6 +127,8 @@ function movieDetailsPage() {
     sectionTrendingMovies.setAttribute('class', 'inactive');
     //Search Movie
     sectionSearchMovie.setAttribute('class', 'inactive');
+
+    sectionMyListMovies.setAttribute('class', 'inactive');
 
     const [_, query] = location.hash.split('=');
     getMovie(query);

@@ -81,6 +81,7 @@ const sectionSearchMovie = $('#search-movies');
 // Container Movies
 const containerSearchMovies = $('#container-search--movies');
 const articleSearchMovie = $('#article-search--movies');
+const containerSearchBottom = $('.container-search--bottom');
 
 // Subtitle
 const subtitleSearchMovie = $('.subtitle-search--movies');
@@ -92,6 +93,11 @@ const inputSearch = $Id('input-movie--search');
 
 // Btn Search
 const btnSearch = $('.btn-search');
+
+// List Movies
+const sectionMyListMovies = $Id('myList-movies');
+const containerMyListMovies = $Id('container-MyList--movies');
+const subtitleMyListMovies = $('.subtitle-MyList--movies');
 
 /* SKeleton Loading */
 
@@ -114,3 +120,6 @@ const skeletonLoadingSearchMovie = $('#skeleton-search--movies');
 const btnLoadMoreTrending = $('.button-load--moreTrending');
 const btnLoadMoreCategory = $('.button-load--moreCategory');
 const btnLoadMoreSearch = $('.btn-load--moreSearch');
+
+// Skeleton List Movies
+const skeletonLoadingMyListMovies = $('#skeleton-myList--movies');
