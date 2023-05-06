@@ -58,8 +58,8 @@ img {
 .movie-large img,
 .img-movie--details {
     border-radius: 20px;
-    width: 200px;
-    height: 300px;
+    width: 100px;
+    height: 150px;
 }
 
 .subtitle {
@@ -72,7 +72,7 @@ img {
 .btn-back {
     margin-top: 10px;
     background-color: var(--purple-light-1);
-    padding: 5px;
+    padding: 3px;
     font-weight: bolder;
     color: #000000;
 }
@@ -461,12 +461,12 @@ footer {
     margin-bottom: 12px;
     margin-right: 5px;
     padding: 15px 12px;
-    height: 250px;
-    min-height: 250px;
-    max-height: 250px;
-    width: 150px;
-    min-width: 150px;
-    max-width: 150px;
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
     animation: loading-skeleton infinite 1s;
 }
 
@@ -565,28 +565,6 @@ footer {
 /************************************/
 /*            Responsive            */
 /************************************/
-/* @media screen and (min-width: 400px) {
-    .subtitle-categories--button {
-        padding-top: 20px;
-    }
-
-    .subtitle-trending--movies {
-        margin: 0;
-    }
-
-    #container-trending--preview {
-        padding-bottom: 20px;
-    }
-
-    .btn-category {
-        margin-top: 10px;
-        margin-bottom: 15px;
-    }
-} */
-
-/************************************/
-/*            Responsive            */
-/************************************/
 @media screen and (min-width: 667px) {
     h1 {
         font-size: 34px;
@@ -645,8 +623,8 @@ footer {
     .movie-large img,
     .img-movie--details {
         border-radius: 20px;
-        width: 220px;
-        height: 300px;
+        width: 150px;
+        height: 200px;
     }
 
     .subtitle-category--movies,
@@ -659,7 +637,7 @@ footer {
     .btn-back,
     .btn-home {
         font-size: 18px;
-        padding: 8px;
+        padding: 5px;
     }
 
     #container-button--back {
@@ -701,12 +679,12 @@ footer {
         border-radius: 20px;
         margin-bottom: 15px;
         padding: 7px 12px;
-        height: 300px;
-        min-height: 300px;
-        max-height: 300px;
-        width: 220px;
-        min-width: 220px;
-        max-width: 220px;
+        height: 200px;
+        min-height: 200px;
+        max-height: 200px;
+        width: 1500px;
+        min-width: 150px;
+        max-width: 150px;
         animation: loading-skeleton infinite 1s;
     }
 
