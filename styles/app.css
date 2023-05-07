@@ -107,8 +107,8 @@ img {
 .btn-add--myListLarge {
     position: absolute;
     margin: 0 auto;
-    left: 80%;
-    margin-top: 10px;
+    left: 70%;
+    margin-top: 3px;
     opacity: 85%;
     background-color: white;
 }
@@ -702,5 +702,14 @@ footer {
 
     .btn-add--myList {
         margin-top: -20px;
+    }
+
+    .btn-add--myListLarge {
+        position: absolute;
+        margin: 0 auto;
+        left: 74%;
+        margin-top: 5px;
+        opacity: 85%;
+        background-color: white;
     }
 }

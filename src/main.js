@@ -137,7 +137,9 @@ function createContainerMoviesAndScrollX(
 
         const listMovies =
             JSON.parse(localStorage.getItem('liked_movies')) || {};
+
         if (listMovies[addToMyListBtn.id]) {
+            addToMyListBtn.classList.toggle('btn-add--clicked');
             addToMyListBtn.innerHTML = '';
             addToMyListBtn.innerHTML = '✔️';
         }
@@ -212,7 +214,9 @@ function createContainerMoviesOnLarge(
 
         const listMovies =
             JSON.parse(localStorage.getItem('liked_movies')) || {};
+
         if (listMovies[addToMyListBtn.id]) {
+            addToMyListBtn.classList.toggle('btn-add--clicked');
             addToMyListBtn.innerHTML = '';
             addToMyListBtn.innerHTML = '✔️';
         }
